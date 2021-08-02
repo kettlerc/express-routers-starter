@@ -1,9 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const booksRouter = require('./routes/books.router');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const bookList = [];
 const movieList = [];
 
 // express static file serving - public is the folder name
@@ -19,14 +19,9 @@ app.listen(PORT, () => {
 })
 
 // TODO - Move these routes to their own modules!
-app.get('/book', (req, res) => {
-    res.send(bookList);
-});
 
-app.post('/book', (req, res) => {
-    bookList.push(req.body);
-    res.sendStatus(200);
-});
+//Tell express to use router
+app.use('/book', booksRouter);
 
 app.get('/movie', (req, res) => {
   res.send(movieList);
