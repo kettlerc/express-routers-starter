@@ -4,7 +4,6 @@ const booksRouter = require('./routes/books.router');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const bookList = [];
 const movieList = [];
 
 // express static file serving - public is the folder name
@@ -22,7 +21,7 @@ app.listen(PORT, () => {
 // TODO - Move these routes to their own modules!
 
 //Tell express to use router
-app.use('/', booksRouter)
+app.use('/book', booksRouter);
 
 app.get('/movie', (req, res) => {
   res.send(movieList);
