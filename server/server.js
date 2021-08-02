@@ -1,10 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const booksRouter = require('./routes/books.router');
+const moviesRouter = require('./routes/movies.router')
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const movieList = [];
 
 // express static file serving - public is the folder name
 app.use( express.static('server/public') );
@@ -18,16 +18,8 @@ app.listen(PORT, () => {
     console.log(`Server running on port: ${PORT}...`);
 })
 
-// TODO - Move these routes to their own modules!
-
 //Tell express to use router
 app.use('/book', booksRouter);
+app.use('/movie', moviesRouter)
 
-app.get('/movie', (req, res) => {
-  res.send(movieList);
-});
-
-app.post('/movie', (req, res) => {
-  movieList.push(req.body);
-  res.sendStatus(200);
-});
+// TODO - Move these routes to their own modules!
